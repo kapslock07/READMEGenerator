@@ -1,7 +1,9 @@
-function generateMarkdown(data) {
+function generateMarkdown(answers, gitHubStuff) {
   return `
-# ${data.title}
-
+# ${answers.title}
+Description: ${answers.description} \n
+Installation: ${answers.installation} \n
+Profile Pic: ${gitHubStuff.avatar_url}
 `;
 }
 
