@@ -57,20 +57,20 @@ function writeToFile(fileName, data) {
         });
 }
 
-// function addToFile() {
-//     writeToFile("README2.md", questions.title);
-//     writeToFile("README2.md", questions.desctiption);
-//     writeToFile("README2.md", questions.installation);
-//     writeToFile("README2.md", questions.usage);
-//     writeToFile("README2.md", questions.licenses);
-//     writeToFile("README2.md", questions.contributing);
-//     writeToFile("README2.md", questions.testing);
-// }
+function addToFile() {
+    writeToFile("README2.md", questions.title);
+    writeToFile("README2.md", questions.desctiption);
+    writeToFile("README2.md", questions.installation);
+    writeToFile("README2.md", questions.usage);
+    writeToFile("README2.md", questions.licenses);
+    writeToFile("README2.md", questions.contributing);
+    writeToFile("README2.md", questions.testing);
+}
 
 
 
 function init() {
-    inquirer
+    await inquirer
         .prompt(questions)
         .then((answers) => {
             console.log("inside inquirer");
@@ -78,8 +78,9 @@ function init() {
                 console.log(data);
             });
         });
-
+    addToFile();
 }
 init();
+
 
 
