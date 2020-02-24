@@ -1,5 +1,5 @@
-const apiDoc = require('./utils/api');
-const generateMarkdownDoc = require('./utils/generateMarkdown');
+const api = require('./utils/api');
+const generateMarkdown = require('./utils/generateMarkdown');
 const inquirer = require("inquirer");
 const fs = require('fs');
 
@@ -48,7 +48,7 @@ const questions = [
 
 
 function writeToFile(fileName, data) {
-    fs.appendFile(fileName, data + '\n', 'utf8',
+    fs.writeFile(fileName, data + '\n', 'utf8',
         // callback function
         function (err) {
             if (err) throw err;
@@ -57,28 +57,46 @@ function writeToFile(fileName, data) {
         });
 }
 
-function addToFile() {
-    writeToFile("README2.md", questions.title);
-    writeToFile("README2.md", questions.desctiption);
-    writeToFile("README2.md", questions.installation);
-    writeToFile("README2.md", questions.usage);
-    writeToFile("README2.md", questions.licenses);
-    writeToFile("README2.md", questions.contributing);
-    writeToFile("README2.md", questions.testing);
-}
+// function addToFile(answers) {
+//     writeToFile("README2.md", answers.title);
+//     writeToFile("README2.md", answers.desctiption);
+//     writeToFile("README2.md", answers.installation);
+//     writeToFile("README2.md", answers.usage);
+//     writeToFile("README2.md", answers.licenses);
+//     writeToFile("README2.md", answers.contributing);
+//     writeToFile("README2.md", answers.testing);
+// }
 
 
 
 function init() {
-    await inquirer
+    inquirer
         .prompt(questions)
         .then((answers) => {
             console.log("inside inquirer");
-            apiDoc.getUser(answers).then(({ data }) => {
-                console.log(data);
-            });
+            console.log(answers)
+                api.getUser(answers.username).then(function (res) {
+                    // console.log(res.data.email);
+                    const emailAddress = res.data.email
+                    // console.log(res.data.avatar_url);
+                    const profilePicUrl = res.data.avatar_url
+                    console.log(emailAddress);
+                    console.log(profilePicUrl);
+              
+              
+                    let content = generateMarkdown(answers, res.data);
+                    writeToFile("README3.md", content);
+                })
+                .catch((err)=> {
+                    console.log(err)
+                    throw err;
+                });
+
+        })
+        .catch((err)=> {
+            console.log(err)
+            throw err;
         });
-    addToFile();
 }
 init();
 
