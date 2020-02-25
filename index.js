@@ -1,5 +1,3 @@
-// ADD OTHER ANSWERS TO README, CONVERT URL TO IMAGE, MAKE A GIF
-
 const api = require('./utils/api');
 const generateMarkdown = require('./utils/generateMarkdown');
 const inquirer = require("inquirer");
@@ -88,7 +86,7 @@ function init() {
 
 
                 let content = generateMarkdown(answers, res.data);
-                writeToFile("README3.md", content);
+                writeToFile("README.md", content);
             })
                 .catch((err) => {
                     console.log(err)
