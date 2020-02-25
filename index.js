@@ -1,3 +1,5 @@
+// ADD OTHER ANSWERS TO README, CONVERT URL TO IMAGE, MAKE A GIF
+
 const api = require('./utils/api');
 const generateMarkdown = require('./utils/generateMarkdown');
 const inquirer = require("inquirer");
@@ -75,30 +77,33 @@ function init() {
         .then((answers) => {
             console.log("inside inquirer");
             console.log(answers)
-                api.getUser(answers.username).then(function (res) {
-                    // console.log(res.data.email);
-                    const emailAddress = res.data.email
-                    // console.log(res.data.avatar_url);
-                    const profilePicUrl = res.data.avatar_url
-                    console.log(emailAddress);
-                    console.log(profilePicUrl);
-              
-              
-                    let content = generateMarkdown(answers, res.data);
-                    writeToFile("README3.md", content);
-                })
-                .catch((err)=> {
+            api.getUser(answers.username).then(function (res) {
+                // console.log(res.data.email);
+                const emailAddress = res.data.email
+                // console.log(res.data.avatar_url);
+                const profilePicUrl = res.data.avatar_url
+                console.log(emailAddress);
+                console.log(profilePicUrl);
+                console.log(res.data)
+
+
+                let content = generateMarkdown(answers, res.data);
+                writeToFile("README3.md", content);
+            })
+                .catch((err) => {
                     console.log(err)
                     throw err;
                 });
 
         })
-        .catch((err)=> {
+        .catch((err) => {
             console.log(err)
             throw err;
         });
+
 }
 init();
+
 
 
 
