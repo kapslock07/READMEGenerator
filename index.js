@@ -44,6 +44,11 @@ const questions = [
         message: "What types of testing will be used?",
         name: "testing"
     },
+    {
+        type: "input",
+        message: "Do you have any questions?",
+        name: "questions"
+    },
 ];
 
 
@@ -56,16 +61,6 @@ function writeToFile(fileName, data) {
             console.log("Data is appended to file successfully.")
         });
 }
-
-// function addToFile(answers) {
-//     writeToFile("README2.md", answers.title);
-//     writeToFile("README2.md", answers.desctiption);
-//     writeToFile("README2.md", answers.installation);
-//     writeToFile("README2.md", answers.usage);
-//     writeToFile("README2.md", answers.licenses);
-//     writeToFile("README2.md", answers.contributing);
-//     writeToFile("README2.md", answers.testing);
-// }
 
 
 
